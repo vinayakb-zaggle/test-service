@@ -15,7 +15,12 @@ jobs:
 
       - name: Rename Modules
         run: |
-          repo_name=$(basename `git rev-parse --show-toplevel`)
+          full_repo_name=$(basename `git rev-parse --show-toplevel`)
+          if [[ $full_repo_name == *-service ]]; then
+            repo_name=${full_repo_name%-service}
+          else
+            repo_name=$full_repo_name
+          fi
           echo "Repository name is $repo_name"
           mv test-app "$repo_name-app"
           mv test-api "$repo_name-api"
@@ -30,7 +35,3 @@ jobs:
           git add .
           git commit -m "Initial Project Setup"
           git push
-
-      - name: Remove Workflow File
-        run: |
-          rm .github/workflows/project-setup.yml
