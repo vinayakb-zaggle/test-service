@@ -1,0 +1,4 @@
+rootProject.name = 'test-service'
+include 'test-api'
+include 'test-serviceImpl'
+

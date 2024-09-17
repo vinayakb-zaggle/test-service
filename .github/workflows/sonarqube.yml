@@ -1,0 +1,31 @@
+name: Rename Modules on Repository Creation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  rename-modules:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Rename Modules
+        run: |
+          repo_name=$(basename `git rev-parse --show-toplevel`)
+          echo "Repository name is $repo_name"
+          mv test-service "$repo_name-service"
+          mv "$repo_name-service/test-api" "$repo_name-service/$repo_name-api"
+          find . -type f -name "settings.gradle" -exec sed -i "s/test-service/$repo_name-service/g" {} +
+          find . -type f -name "settings.gradle" -exec sed -i "s/test-api/$repo_name-api/g" {} +
+
+      - name: Commit changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add .
+          git commit -m "Renamed modules to match repository name"
+          git push
