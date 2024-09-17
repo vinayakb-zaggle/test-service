@@ -18,7 +18,7 @@ jobs:
           repo_name=$(basename `git rev-parse --show-toplevel`)
           echo "Repository name is $repo_name"
           mv test-app "$repo_name-app"
-          mv test-api "/$repo_name-api"
+          mv test-api "$repo_name-api"
           find . -type f -name "settings.gradle" -exec sed -i "s/test-app/$repo_name-app/g" {} +
           find . -type f -name "settings.gradle" -exec sed -i "s/test-api/$repo_name-api/g" {} +
 
