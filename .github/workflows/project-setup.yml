@@ -26,7 +26,7 @@ jobs:
           mv test-api "$repo_name-api"
           find . -type f -name "settings.gradle" -exec sed -i "s/test-app/$repo_name-app/g" {} +
           find . -type f -name "settings.gradle" -exec sed -i "s/test-api/$repo_name-api/g" {} +
-          find . -type f -name "settings.gradle" -exec sed -i "s/rootProject.name = 'test-service'/rootProject.name = '$repo_name-service'/g" {} +
+          find . -type f -name "settings.gradle" -exec sed -i "s/rootProject.name = 'test-service'/rootProject.name = '$full_repo_name'/g" {} +
 
       - name: Commit changes
         run: |
