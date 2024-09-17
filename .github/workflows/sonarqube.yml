@@ -15,8 +15,7 @@ jobs:
 
       - name: Rename Modules
         run: |
-#          repo_name=$(basename `git rev-parse --show-toplevel`)
-          repo_name="test"
+          repo_name=$(basename `git rev-parse --show-toplevel`)
           echo "Repository name is $repo_name"
           mv test-serviceImpl "$repo_name-serviceImpl"
 #          mv "$repo_name/test-api" "$repo_name/$repo_name-api"
