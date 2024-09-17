@@ -15,10 +15,12 @@ jobs:
 
       - name: Rename Modules
         run: |
-          repo_name=$(basename `git rev-parse --show-toplevel`)
+#          repo_name=$(basename `git rev-parse --show-toplevel`)
+          repo_name="test"
           echo "Repository name is $repo_name"
           mv test-serviceImpl "$repo_name-serviceImpl"
-          mv "$repo_name/test-api" "$repo_name/$repo_name-api"
+#          mv "$repo_name/test-api" "$repo_name/$repo_name-api"
+          mv "/test-api" "/$repo_name-api"
 #          find . -type f -name "settings.gradle" -exec sed -i "s/test-service/$repo_name-service/g" {} +
 #          find . -type f -name "settings.gradle" -exec sed -i "s/test-api/$repo_name-api/g" {} +
 
